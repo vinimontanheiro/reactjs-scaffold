@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import logo from './logo.svg';
-import HomeComponent from './modules/HOME/HomeComponent';
-import './App.scss';
-import Loading from './modules/ui/Loading';
-import useLoading from './modules/hooks/useLoading';
+import logo from '../../logo.svg';
+import Home from './Home';
+import Loading from '../ui/Loading';
+import useLoading from '../hooks/useLoading';
+import { ROUTE } from '../Routes/RoutesMapper';
 
-const App = () => {
+const Main = ({ history }) => {
   const [color, setColor] = useState(``);
   const { updateLoading } = useLoading();
 
@@ -33,7 +33,7 @@ const App = () => {
   }, []);
 
   return (
-    <HomeComponent className="App" color={color}>
+    <Home className="App" color={color}>
       <>
         <img src={logo} className="App-logo" alt="logo" />
         <button
@@ -45,10 +45,19 @@ const App = () => {
         >
           Learn React
         </button>
+
+        <button
+          type="button"
+          onClick={() => {
+            history.push(ROUTE.DASHBOARD.PATH, { color });
+          }}
+        >
+          Dashboard
+        </button>
+        <Loading />
       </>
-      <Loading />
-    </HomeComponent>
+    </Home>
   );
 };
 
-export default App;
+export default Main;

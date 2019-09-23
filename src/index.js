@@ -1,16 +1,19 @@
 import React from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
+import { BrowserRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import { persistor, store } from './redux/store';
 import './index.scss';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
+import RoutesProvider from './modules/Routes/RoutesProvider';
 
 ReactDOM.render(
   <ReduxProvider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <App />
+      <BrowserRouter basename="/tests">
+        <RoutesProvider isAuth />
+      </BrowserRouter>
     </PersistGate>
   </ReduxProvider>,
   document.getElementById(`root`),

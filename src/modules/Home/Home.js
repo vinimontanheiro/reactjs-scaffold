@@ -25,7 +25,7 @@ const Body = styled.div`
   justify-content: center;
 `;
 
-const HomeComponent = ({ color, children }) => {
+const Home = ({ color, children }) => {
   return (
     <Container className="App" color={color}>
       <Body> {children}</Body>
@@ -33,13 +33,13 @@ const HomeComponent = ({ color, children }) => {
   );
 };
 
-HomeComponent.defaultProps = {
+Home.defaultProps = {
   color: `black`,
 };
 
-HomeComponent.propTypes = {
+Home.propTypes = {
   color: PropTypes.string,
   children: PropTypes.node.isRequired,
 };
 
-export default HomeComponent;
+export default Home;
