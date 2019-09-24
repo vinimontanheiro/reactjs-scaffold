@@ -1,45 +1,70 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import logo from '../../logo.svg';
+import Example from './Example';
+import Loading from '../ui/Loading';
+import useLoading from '../hooks/useLoading';
+import { ROUTE } from '../Routes/RoutesMapper';
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  width: 100%;
-  height: 100%;
-  ${({ color }) => color && `background-color: ${color}`};
+const Home = ({ history }) => {
+  const [color, setColor] = useState(``);
+  const { updateLoading } = useLoading();
 
-  &:hover {
-    background-color: pink;
-  }
-`;
+  const changeColor = useCallback(newColor => {
+    setColor(newColor);
+  }, []);
 
-const Body = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-`;
+  useEffect(() => {
+    // Did mount
+    setColor(`red`);
+    console.log(` 1 Im ${color}`);
+  }, []);
 
-const Home = ({ color, children }) => {
+  useEffect(() => {
+    // Did update
+    console.log(`2 Im ${color}`);
+  }, [color]);
+
+  useEffect(() => {
+    updateLoading(true);
+    const timer = setTimeout(() => {
+      updateLoading(false);
+    }, 6000);
+    return () => timer && clearTimeout(timer);
+  }, []);
+
   return (
-    <Container className="App" color={color}>
-      <Body> {children}</Body>
-    </Container>
+    <Example className="App" color={color}>
+      <>
+        <img src={logo} className="App-logo" alt="logo" />
+        <button
+          type="button"
+          className="App-link"
+          onClick={() => {
+            changeColor(`green`);
+          }}
+        >
+          Learn React
+        </button>
+
+        <button
+          type="button"
+          onClick={() => {
+            history.push(ROUTE.DASHBOARD.PATH, { color });
+          }}
+        >
+          Dashboard
+        </button>
+        <Loading />
+      </>
+    </Example>
   );
 };
 
-Home.defaultProps = {
-  color: `black`,
-};
-
 Home.propTypes = {
-  color: PropTypes.string,
-  children: PropTypes.node.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default Home;

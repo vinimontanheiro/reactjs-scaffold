@@ -7,13 +7,22 @@ import { persistor, store } from './redux/store';
 import './index.scss';
 import * as serviceWorker from './serviceWorker';
 import RoutesProvider from './modules/Routes/RoutesProvider';
+import I18nProvider from './services/i18n/I18nProvider';
+
+const App = () => {
+  return (
+    <I18nProvider>
+      <BrowserRouter basename="/">
+        <RoutesProvider isAuth={false} />
+      </BrowserRouter>
+    </I18nProvider>
+  );
+};
 
 ReactDOM.render(
   <ReduxProvider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <BrowserRouter basename="/tests">
-        <RoutesProvider isAuth />
-      </BrowserRouter>
+      <App />
     </PersistGate>
   </ReduxProvider>,
   document.getElementById(`root`),

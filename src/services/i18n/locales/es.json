@@ -1,0 +1,11 @@
+{
+  "login":{
+    "welcome": "Bienvenidos"
+  },
+  "language":{
+    "choose_language" : "Seleccione lo idioma",
+    "portuguese" : "Portugués",
+    "english": "Inglés",
+    "spanish": "Español"
+  }
+}

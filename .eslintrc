@@ -23,7 +23,6 @@
     "class-methods-use-this": "off",
     "no-useless-escape": "off",
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "off",
     "no-bitwise": "off",
     "no-param-reassign": "warn",
     "no-prototype-builtins": "warn",
@@ -42,6 +41,7 @@
     "import/prefer-default-export": "off",
     "import/no-cycle": "off",
     "no-sequences": "warn",
+    "react-hooks/exhaustive-deps": "off",
     "import/no-extraneous-dependencies": [
       "error",
       {

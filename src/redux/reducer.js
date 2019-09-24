@@ -1,13 +1,16 @@
 import { handleActions } from 'redux-actions';
-import { SET_APP, SET_LOADING } from './actions';
+import { SET_APP, SET_LOADING, RESET_STORE } from './actions';
+import { getBrowserLanguage } from '../services/utils';
 
 const initialState = {
   loading: false,
-  x: false,
+  language: getBrowserLanguage(),
+  timezoneSTR: `UTC`,
 };
 
 const App = handleActions(
   {
+    [RESET_STORE]: () => initialState,
     [SET_APP]: (state, { payload }) => ({
       ...state,
       ...payload,

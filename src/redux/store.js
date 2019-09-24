@@ -9,7 +9,7 @@ const rootReducer = combineReducers({
 });
 
 const persistConfig = {
-  key: `tests`,
+  key: `reactjs-scaffold`,
   storage,
   stateReconciler: autoMergeLevel2,
 };

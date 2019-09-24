@@ -1,14 +1,14 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Main from '../Home/Main';
+import Login from '../Login/Login';
 import PrivateRoute from './PrivateRoute';
 import { PrivateRoutes } from './RoutesMapper';
 
 const RoutesProvider = ({ isAuth }) => {
   return (
     <Switch>
-      <Route exact path="/" component={Main} />
+      <Route exact path="/" component={Login} />
       <>
         {PrivateRoutes.map(
           ({ name, path, component, ignore }) =>
