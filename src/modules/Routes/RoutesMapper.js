@@ -1,26 +1,26 @@
-import Dashboard from '../Dashboard/Dashboard';
+import Home from '../Home/HomeComponent';
 
 export const ROUTE = {
-  DASHBOARD: {
-    NAME: `dashboard`,
-    PATH: `/dashboard`,
+  HOME: {
+    NAME: `home`,
+    PATH: `/home`,
   },
 };
 
 export const MenuRoutes = [
   {
-    name: ROUTE.DASHBOARD.NAME,
-    path: ROUTE.DASHBOARD.PATH,
-    component: Dashboard,
+    name: ROUTE.HOME.NAME,
+    path: ROUTE.HOME.PATH,
+    component: Home,
     iconName: `home`,
   },
 ];
 
 export const PrivateRoutes = [
   {
-    name: ROUTE.DASHBOARD.NAME,
-    path: ROUTE.DASHBOARD.PATH,
-    component: Dashboard,
+    name: ROUTE.HOME.NAME,
+    path: ROUTE.HOME.PATH,
+    component: Home,
   },
   // ...MenuRoutes,
 ];

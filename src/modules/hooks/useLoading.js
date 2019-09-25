@@ -15,7 +15,7 @@ const useLoading = () => {
     val => {
       dispatch(setLoading(val));
     },
-    [loading],
+    [dispatch],
   );
   return {
     loading,

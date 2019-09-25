@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import logo from '../../logo.svg';
-import Example from './Example';
+import logo from '../../assets/img/logo.svg';
+import ExampleComponent from './ExampleComponent';
 import Loading from '../ui/Loading';
 import useLoading from '../hooks/useLoading';
 import { ROUTE } from '../Routes/RoutesMapper';
@@ -15,12 +15,6 @@ const Home = ({ history }) => {
   }, []);
 
   useEffect(() => {
-    // Did mount
-    setColor(`red`);
-    console.log(` 1 Im ${color}`);
-  }, []);
-
-  useEffect(() => {
     // Did update
     console.log(`2 Im ${color}`);
   }, [color]);
@@ -29,12 +23,12 @@ const Home = ({ history }) => {
     updateLoading(true);
     const timer = setTimeout(() => {
       updateLoading(false);
-    }, 6000);
+    }, 3000);
     return () => timer && clearTimeout(timer);
-  }, []);
+  }, [updateLoading]);
 
   return (
-    <Example className="App" color={color}>
+    <ExampleComponent className="App" color={color}>
       <>
         <img src={logo} className="App-logo" alt="logo" />
         <button
@@ -57,7 +51,7 @@ const Home = ({ history }) => {
         </button>
         <Loading />
       </>
-    </Example>
+    </ExampleComponent>
   );
 };
 

@@ -4,6 +4,7 @@ import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 import { setApp } from '../../redux/actions';
+import { LANGUAGES } from '../../constants';
 
 const Container = styled.div`
   display: flex;
@@ -24,28 +25,9 @@ const Body = styled.div`
   justify-content: center;
 `;
 
-const SelectBox = styled(Select)`
-  && {
-    color: red;
-  }
-`;
-
 const SelectLanguage = () => {
   /* eslint-disable react/prop-types */
-  const languages = [
-    {
-      value: `pt_BR`,
-      label: `portuguese`,
-    },
-    {
-      value: `en_US`,
-      label: `english`,
-    },
-    {
-      value: `es_ES`,
-      label: `spanish`,
-    },
-  ];
+
   const { t } = useTranslation(`language`);
   const dispatch = useDispatch();
   const { language } = useSelector(
@@ -68,9 +50,9 @@ const SelectLanguage = () => {
   return (
     <Container>
       <Body>
-        <FormControl>
+        <FormControl fullWidth>
           <InputLabel htmlFor="language">{t(`choose_language`)}</InputLabel>
-          <SelectBox
+          <Select
             value={selected}
             onChange={handleChange}
             inputProps={{
@@ -78,12 +60,12 @@ const SelectLanguage = () => {
               id: `language`,
             }}
           >
-            {languages.map(item => (
+            {LANGUAGES.map(item => (
               <MenuItem key={item.label} selected={selected === item.value} value={item.value}>
                 {t(item.label)}
               </MenuItem>
             ))}
-          </SelectBox>
+          </Select>
         </FormControl>
       </Body>
     </Container>

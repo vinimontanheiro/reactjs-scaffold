@@ -1,11 +1,16 @@
 {
   "login":{
-    "welcome": "Welcome"
+    "user": "User",
+    "password": "Password"
   },
   "language":{
     "choose_language" : "Choose language",
     "portuguese" : "Portuguese",
     "english": "English",
     "spanish": "Spanish"
+  },
+  "error":{
+    "required_user": "Input user",
+    "required_password" : "Input password"
   }
 }

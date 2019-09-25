@@ -4,25 +4,19 @@ import { PersistGate } from 'redux-persist/lib/integration/react';
 import { BrowserRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import { persistor, store } from './redux/store';
-import './index.scss';
 import * as serviceWorker from './serviceWorker';
 import RoutesProvider from './modules/Routes/RoutesProvider';
 import I18nProvider from './services/i18n/I18nProvider';
-
-const App = () => {
-  return (
-    <I18nProvider>
-      <BrowserRouter basename="/">
-        <RoutesProvider isAuth={false} />
-      </BrowserRouter>
-    </I18nProvider>
-  );
-};
+import './assets/scss/index.scss';
 
 ReactDOM.render(
   <ReduxProvider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <App />
+      <I18nProvider>
+        <BrowserRouter basename="/">
+          <RoutesProvider isAuth={false} />
+        </BrowserRouter>
+      </I18nProvider>
     </PersistGate>
   </ReduxProvider>,
   document.getElementById(`root`),

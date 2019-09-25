@@ -3,16 +3,11 @@ import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
 const PrivateRoute = ({ component: Component, isAuth, ...rest }) => {
-  console.log(`Rest `, rest);
+  /* eslint-disable react/jsx-props-no-spreading */
   return (
-    /* eslint-disable react/jsx-props-no-spreading */
     <Route
       {...rest}
-      render={props => {
-        console.log(`props `, props);
-
-        return isAuth ? <Component {...rest} {...props} /> : <Redirect to="/" />;
-      }}
+      render={props => (isAuth ? <Component {...rest} {...props} /> : <Redirect to="/" />)}
     />
   );
 };
