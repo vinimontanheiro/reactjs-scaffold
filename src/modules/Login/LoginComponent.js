@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import * as Yup from 'yup';
 import {
@@ -14,6 +15,9 @@ import {
 } from '@material-ui/core';
 import { Formik } from 'formik';
 import SelectLanguage from '../ui/SelectLanguage';
+import { setApp } from '../../redux/actions';
+import { ROUTE } from '../Routes/RoutesMapper';
+import { HTTP_STATUS } from '../../constants';
 
 const Container = styled.div`
   display: flex;
@@ -80,19 +84,30 @@ RenderMessageError.propTypes = {
   errors: PropTypes.shape({}).isRequired,
 };
 
-const LoginComponent = () => {
-  /* eslint-disable react/prop-types */
+const LoginComponent = ({ history }) => {
   const { t } = useTranslation(`login`);
+  const dispatch = useDispatch();
 
   return (
     <Container>
-      <Login>
+      <Login id="drag" className="draggable">
         <Body elevation={3}>
           <Formik
             initialValues={{ user: ``, password: `` }}
             validationSchema={validationSchema()}
-            onSubmit={values => {
-              console.log(`Send to server >>> `, values);
+            onSubmit={async values => {
+              const { status } = await fetch(`http://localhost:8002/login`, {
+                method: `POST`,
+                body: JSON.stringify(values),
+                headers: {
+                  'Content-Type': `application/json`,
+                },
+              });
+              const isAuth = status === HTTP_STATUS.ACCEPTED;
+              dispatch(setApp({ isAuth }));
+              if (isAuth) {
+                history.push(ROUTE.HOME.PATH);
+              }
             }}
             render={({ values, handleSubmit, handleChange, errors }) => (
               <Form>
@@ -150,7 +165,9 @@ const LoginComponent = () => {
 };
 
 LoginComponent.propTypes = {
-  location: PropTypes.shape({}).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default LoginComponent;

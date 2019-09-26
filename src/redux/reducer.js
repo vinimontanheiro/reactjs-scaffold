@@ -6,6 +6,7 @@ const initialState = {
   loading: false,
   language: getBrowserLanguage(),
   timezoneSTR: `UTC`,
+  isAuth: false,
 };
 
 const App = handleActions(
